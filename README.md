@@ -25,7 +25,7 @@ Produce visualizations _(todo: what visualizations)_
 4. 2 (Thursday)
 5. 2 (Saturday)
 
-_prepare presentation_
+_prepare presentation on *Tuesday*_
 
 # Contributors
 Noah Sragow and Georgiy Treyvus
