@@ -15,7 +15,9 @@ Produce visualizations _(todo: what visualizations)_
 3. Create outlier identifier/Identify criteria to identify outliers
 4. Make automated delivery of outlier listings and visualizations
 5. Create codebase for public use of the project
+
 <br>
+
 ### Timeline in days (done by end of...)
 1. 2 (Friday)
 2. 3 (Monday)
