@@ -41,6 +41,7 @@ def process(df):
     zero_out(df)
     remove_dups(df)
     drop_not_found(df)
+    df.set_index("company_stock_symbol_according_to_yahoo",inplace=True)
     return df
 
 
