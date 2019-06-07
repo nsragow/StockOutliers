@@ -1,3 +1,4 @@
 /scratchspace
 */__pycache__
 *.csv
+*.ipynb
