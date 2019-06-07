@@ -1,6 +1,4 @@
 import pandas as pd
-df = process(pd.read_csv("../stock_data.csv"))
-new_df = process(pd.read_csv("../new_stock_data.csv"))
 
 def remove_dups(df):
     df.drop(df[df.duplicated(df.columns)].index,axis=0,inplace=True)
@@ -44,3 +42,8 @@ def process(df):
     remove_dups(df)
     drop_not_found(df)
     return df
+
+
+
+df = process(pd.read_csv("../stock_data.csv"))
+new_df = process(pd.read_csv("../new_stock_data.csv"))
