@@ -1,4 +1,8 @@
 /scratchspace
 */__pycache__
 *.csv
+<<<<<<< HEAD
+=======
+
+>>>>>>> analysis
 *.ipynb
