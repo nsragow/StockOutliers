@@ -44,6 +44,17 @@ def process(df):
     df.set_index("company_stock_symbol_according_to_yahoo",inplace=True)
     df.drop("interest_expense",axis=1,inplace=True)
     return df
+def clean_corrs(corrs):
+    indices = set()
+    for ind in corrs.index:
+        if ind[0] != ind[1]:
+            toadd = (ind[0],ind[1]) if ind[0]>ind[1] else (ind[1],ind[0])
+            indices.add(toadd)
+    new_corrs = corrs[list(indices)].sort_values()
+    neg = corrs<-0.7
+    pos = corrs > .7
+    return new_corrs[neg | pos]
+
 
 
 
