@@ -17,10 +17,8 @@ def get_model(target, predictors):
     return model
 
 #predictors must be in correct order
-def predictions(df,predictors,target,model):
-
+def predictions(df,target,predictors,model):
     predictors = add_constant(df.loc[:,predictors].values)
-    print(preditors)
     predictions = model.predict(predictors)
     target = df.loc[:,target]
     resids = target - predictions
@@ -43,9 +41,9 @@ def graph_residuals(resid_df,rsquared,cutoff = .05):
     fig,ax = plt.subplots()
 
     ax.set_title(f"rsquared:{rsquared}")
-    print("here")
+
     ax.scatter(y=resid_df.resid,x=range(resid_df.shape[0]),color=colors)
-    print("and here")
+
     plt.show()
 
 #what is the formula for rsquared? How can I relate it to if a stock is an outlier?
