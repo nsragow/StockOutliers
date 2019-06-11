@@ -10,6 +10,8 @@ def run(df,target,predictors):
     outliers = get_outliers(resid_df)
     graph_residuals(resid_df,model.rsquared)
 
+    return model,outliers,resid_df
+
 
 
 def get_model(target, predictors):
