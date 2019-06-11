@@ -2,8 +2,6 @@ import pandas as pd
 
 def remove_dups(df):
     df.drop(df[df.duplicated(df.columns)].index,axis=0,inplace=True)
-def drop_not_found(df):
-    df.drop(df[df.company_stock_symbol_according_to_yahoo== "Requested symbol wasn't found"].index,axis=0,inplace=True)
 
 def get_dups(rows,df):
     return df.duplicated(subset=rows)
@@ -40,7 +38,7 @@ def process(df):
     clean(df)
     zero_out(df)
     remove_dups(df)
-    drop_not_found(df)
+
     return df
 def top_corrs(corrs):
     indices = set()
@@ -52,9 +50,3 @@ def top_corrs(corrs):
     neg = corrs<-0.7
     pos = corrs > .7
     return new_corrs[neg | pos]
-
-
-
-
-df = process(pd.read_csv("../stock_data.csv"))
-new_df = process(pd.read_csv("../new_stock_data.csv"))
