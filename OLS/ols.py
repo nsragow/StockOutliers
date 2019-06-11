@@ -2,17 +2,30 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 from statsmodels.api import OLS,add_constant
 
-def run(df,target,predictors):
+def run(df,target,predictors,cutoff=.05):
     target_df = df[target]
     predictors_df = df[predictors]
     model = get_model(target_df,predictors_df)
+    bad_predictors = get_high_p(model)
+    for bad_pred in bad_predictors:
+        predictors.remove(bad_pred)
+    target_df = df[target]
+    predictors_df = df[predictors]
+    model = get_model(target_df,predictors_df)
+
     resid_df,std = predictions(df,target,predictors,model)
-    outliers = get_outliers(resid_df)
-    graph_residuals(resid_df,model.rsquared)
+    outliers = get_outliers(resid_df,cutoff)
+    graph_residuals(resid_df,model.rsquared,cutoff)
 
     return model,outliers,resid_df
 
+def get_high_p(model):
+    bads = []
+    for pval in model.pvalues.index:
 
+        if model.pvalues[pval] > .05:
+            bads.append(pval)
+    return bads
 
 def get_model(target, predictors):
     model = OLS(target,add_constant(predictors)).fit()
