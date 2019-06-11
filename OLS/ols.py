@@ -20,6 +20,7 @@ def get_model(target, predictors):
 def predictions(df,predictors,target,model):
 
     predictors = add_constant(df.loc[:,predictors].values)
+    print(preditors)
     predictions = model.predict(predictors)
     target = df.loc[:,target]
     resids = target - predictions
