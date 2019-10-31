@@ -1,5 +1,6 @@
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+import seaborn as sns
 from statsmodels.api import OLS,add_constant
 
 def run(df,target,predictors,cutoff=.05):
@@ -56,9 +57,46 @@ def graph_residuals(resid_df,rsquared,cutoff = .05):
     fig,ax = plt.subplots()
 
     ax.set_title(f"rsquared:{rsquared}")
+    ax.set_ylabel("Residual")
 
+    sns.lineplot(y=[0]*resid_df.shape[0],x=range(resid_df.shape[0]),color="black",ax=ax)
     ax.scatter(y=resid_df.resid,x=range(resid_df.shape[0]),color=colors)
+
 
     plt.show()
 
 #what is the formula for rsquared? How can I relate it to if a stock is an outlier?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def how_many_tens(int_list):
+    count = 0
+    for i in range(len(int_list)):
+        for j in range(len(int_list)):
+            if int_list[i]+int_list[j] == 10:
+                if i != j:
+                    count+=1
+    return count/2

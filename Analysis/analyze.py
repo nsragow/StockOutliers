@@ -40,13 +40,14 @@ def process(df):
     remove_dups(df)
 
     return df
-def top_corrs(corrs):
+def top_corrs(corrs,cutoff=.7):
+    cutoff = abs(cutoff)
     indices = set()
     for ind in corrs.index:
         if ind[0] != ind[1]:
             toadd = (ind[0],ind[1]) if ind[0]>ind[1] else (ind[1],ind[0])
             indices.add(toadd)
     new_corrs = corrs[list(indices)].sort_values()
-    neg = corrs<-0.7
-    pos = corrs > .7
+    neg = corrs<(-1*cutoff)
+    pos = corrs > cutoff
     return new_corrs[neg | pos]
