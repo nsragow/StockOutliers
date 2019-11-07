@@ -6,7 +6,7 @@ def get_soup(url: str, html: str = None) -> BeautifulSoup:
         text = response.text
     else:
         text = html
-    return BeautifulSoup(text)
+    return BeautifulSoup(text,features="html.parser")
 
 def get_recent_val(key,yahoo_soup):
     val = yahoo_soup.select(f"div:has(> div[title=\"{key}\" i]) + div > span")
