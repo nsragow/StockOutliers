@@ -6,3 +6,6 @@
 
 /Yahoo/downloads
 /Analysis/downloads2
+
+Analysis/data_for_web_app
+Analysis/lin_model.pkl
