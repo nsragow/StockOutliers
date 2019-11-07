@@ -20,10 +20,17 @@ class YahooTicker:
         base_url = f"https://finance.yahoo.com/quote/{self.ticker}/"
         fin_url = base_url + f"financials?p={self.ticker}"
         bal_sheet_url = base_url + f"balance-sheet?p={self.ticker}"
+        stat_url = base_url + f"./downloads2/{self.ticker}_stat.html"
         if htmls is None:
-            htmls = {"fin": None, "bal": None}
+            htmls = {"fin": None, "bal": None,"stat":None}
         self.fin_soup = get_soup(fin_url, htmls["fin"])
         self.bal_sheet_soup = get_soup(bal_sheet_url,htmls["bal"])
+        self.stat_soup = get_soup(stat_url,htmls["stat"])
+    def get_market_cap(self):
+        list_res = self.stat_soup.select("td:has(> span:contains(\"Market Cap\")) + td")
+        if len(list_res) != 1:
+            raise ValueError("had multiple returns for css selector")
+        return list_res[0].text
     def get(self,key: str):
         try:
             return get_recent_val(key,self.fin_soup)
@@ -42,12 +49,7 @@ class YahooTicker:
         for key in keys:
             temp_list.append(self.get(key))
         return tuple(temp_list)
-def get_market_cap(html: str):
-    soup = get_soup(None,html)
-    list_res = soup.select("td:has(> span:contains(\"Market Cap\")) + td")
-    if len(list_res) != 1:
-        raise ValueError("had multiple returns for css selector")
-    return list_res[0].text
+
 if __name__ == "__main__":
     file = open("../Analysis/downloads2/FMAO_stat.html","r")
     print(get_market_cap("".join(file.readlines())))
