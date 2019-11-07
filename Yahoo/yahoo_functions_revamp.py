@@ -42,3 +42,13 @@ class YahooTicker:
         for key in keys:
             temp_list.append(self.get(key))
         return tuple(temp_list)
+def get_market_cap(html: str):
+    soup = get_soup(None,html)
+    list_res = soup.select("td:has(> span:contains(\"Market Cap\")) + td")
+    if len(list_res) != 1:
+        raise ValueError("had multiple returns for css selector")
+    return list_res[0].text
+if __name__ == "__main__":
+    file = open("../Analysis/downloads2/FMAO_stat.html","r")
+    print(get_market_cap("".join(file.readlines())))
+    file.close()
