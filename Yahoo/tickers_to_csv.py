@@ -34,6 +34,8 @@ def tickers_to_raw(ticker_list: list, key_list: list, file_path: str, downloads_
             print(e.with_traceback())
     file.close()
 if __name__ == "__main__":
+    main1()
+def main1():
     file = open("../all_tickers.txt", "r")
     lines = file.readlines()
     all_tickers = list(map(lambda x : x.replace("\n",""),lines))
